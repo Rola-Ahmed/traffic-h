@@ -15,7 +15,9 @@ import './secrets.dart';
 import 'package:permission_asker/permission_asker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:geocoding/geocoding.dart';
 
+//List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
 
 
 
@@ -49,7 +51,8 @@ class MapFromToState extends State<FromTo> {
   TextEditingController _originController = TextEditingController();
   TextEditingController _destinationController = TextEditingController();
   late GoogleMapController  mapController; 
-   String location = 'Search Location'; 
+   
+  
 
   
 
@@ -199,13 +202,13 @@ class MapFromToState extends State<FromTo> {
                             print(destinationInput);
                           },
                          ), 
-                         Text(
-                          '${LocationService().getDistancematrix2(_destinationController.text,_originController.text)}',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                          ),
-                        ),
+                        //  Text(
+                        //   '$M',
+                        //    style: TextStyle(
+                        //      color: Colors.black,
+                        //      fontSize: 15,
+                        //    ),
+                        //  ),
                       ],
                     ),
                   ),
@@ -242,6 +245,11 @@ class MapFromToState extends State<FromTo> {
                   polygons: _polygons,
                   polylines: _polylines,
                   initialCameraPosition: _kGooglePlex,
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
+                // compassEnabled:true,
+                //mapToolbarEnabled:true,
+                
                   onMapCreated: (GoogleMapController controller) {
                     
                     _controller.complete(controller);
@@ -304,6 +312,25 @@ class MapFromToState extends State<FromTo> {
     );
     _setMarker(LatLng(lat, lng));
   }
+
+
+
+
+Future<List<Location>> locationFromAddress(
+  String address, {
+  String? localeIdentifier,
+  
+  
+}) =>
+    GeocodingPlatform.instance.locationFromAddress(
+      address,
+      localeIdentifier: localeIdentifier,
+      
+    );
+void M(){
+  print('locatiooooooooooooons');
+print (locationFromAddress("Gronausestraat 710, Enschede"));
+}
 
 }
 
