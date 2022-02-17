@@ -48,7 +48,6 @@ class MapFromToState extends State<FromTo> {
   Completer<GoogleMapController> _controller = Completer();
   TextEditingController _originController = TextEditingController();
   TextEditingController _destinationController = TextEditingController();
- //String googleApikey = "AIzaSyCfyqFlydkxLBFhyTtKdrLnkGyyRP4zqA4";
   late GoogleMapController  mapController; 
    String location = 'Search Location'; 
 
@@ -130,7 +129,12 @@ class MapFromToState extends State<FromTo> {
         title: Text('Enter orgin and destination'),
         backgroundColor: Colors.blueGrey,
       ),
-      body: Container(
+      body: PermissionAskerBuilder(
+        permissions: [
+          Permission.location,
+          //Permission.camera,
+        ],
+        grantedBuilder: (context) => Container(
          alignment: Alignment.center,
     width: double.infinity,
     height: double.infinity,
@@ -255,7 +259,21 @@ class MapFromToState extends State<FromTo> {
              
             ],
           ),
+        )
+
+,
+        notGrantedBuilder: (context, notGrantedPermissions) => Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Not granted permissions:'),
+              for (final p in notGrantedPermissions) Text(p.toString())
+            ],
+          ),
         ),
+        notGrantedListener: (notGrantedPermissions) =>
+            print('Not granted:\n$notGrantedPermissions'),
+      ),
     
     );
   }
