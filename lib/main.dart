@@ -1,6 +1,7 @@
 // ignore_for_file: void_checks
 
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './locationservice.dart';
 //import 'package:search_map_place_updated/search_map_place_updated.dart';
@@ -9,13 +10,23 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 //import 'package:google_api_headers/google_api_headers.dart';
 //import 'package:google_maps_webservice/places.dart';
+import './secrets.dart';
 
+import 'package:permission_asker/permission_asker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 
 
 
 void main() => runApp(MyApp());
+
+/*void main(){
+if (defaultTargetPlatform == TargetPlatform.android) {
+AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+  }
+runApp(MyApp());
+}*/ 
 
 class MyApp extends StatelessWidget {
   @override
@@ -37,7 +48,7 @@ class MapFromToState extends State<FromTo> {
   Completer<GoogleMapController> _controller = Completer();
   TextEditingController _originController = TextEditingController();
   TextEditingController _destinationController = TextEditingController();
- String googleApikey = "AIzaSyCfyqFlydkxLBFhyTtKdrLnkGyyRP4zqA4";
+ //String googleApikey = "AIzaSyCfyqFlydkxLBFhyTtKdrLnkGyyRP4zqA4";
   late GoogleMapController  mapController; 
    String location = 'Search Location'; 
 
@@ -126,6 +137,7 @@ class MapFromToState extends State<FromTo> {
     //color: viewModel.color,
         child:  Column(
             children: [
+              
               Row(
                 children: [
                   Expanded(
@@ -182,8 +194,9 @@ class MapFromToState extends State<FromTo> {
                           //  getSuggestion(DestinationInput);
                             print(DestinationInput);
                           },
-                        ), Text(
-                          '$LocationService().getDistancematrix2(_destinationControllert,_orginController)',
+                         ), 
+                         Text(
+                          '$LocationService().getDistancematrix2(_originController.text, _destinationController.text )',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 25,
@@ -275,5 +288,6 @@ class MapFromToState extends State<FromTo> {
   }
 
 }
+
 
 

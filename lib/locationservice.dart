@@ -59,22 +59,14 @@ class LocationService {
    return results;
    //return results.json['routes'][0]['legs'][0]['start_location'];
   }
-  //&components=country:en
-
-  /*Future<Map<String, dynamic>> getDistancematrix (
-      String origin, String destination) async {
-    final String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origin&destinations=$destination&departure_time=now&key=$key";
-    var response = await http.get(Uri.parse(url));
-    var json = convert.jsonDecode(response.body);
-}*/
-
+ 
 
 /*void Time() async {
   Dio dio = new Dio();
   //var dio = Dio();
   var API_KEY='';
   ////final response = await dio.
-  //get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=orginInput&destinations=DestinationInput&key=API_KEY");
+  //get("https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origin&destinations=$destination&departure_time=now&key=$key";);
   get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C,-73.9976592&key=API_KEY");
    //printvalue=response.data;
    late String orginInput;
@@ -82,35 +74,26 @@ class LocationService {
   return (response.data);
 }*/
 
-  void getDistancematrix2(
-      String origin, String destination) async {
-    
 
-  //try {
-  //   var response = await Dio().get('https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key');
-  //   print(response);
-  // } catch (e) {
-  //   print(e);
-  // }
+      
+   Future<Map<String, dynamic>> getDistancematrix2s(
+      String origin, String destination)
+   async {
 final String url=' https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&&callback=initMap';
 var json='5mn';
-   var response = await http.get(Uri.parse(url));
-    json = convert.jsonDecode(response.body);
+  var response = await http.get(Uri.parse(url));
+    //json = convert.jsonDecode(response.body);
    // return response;
-    print( json);
+    //print( json);
+
+  if (response.statusCode == 200) {
+    var json = convert.jsonDecode(response.body);
+    return json; 
+  } else {
+    throw Exception('An error occurred getting places nearby');
+  }
 }
   
 
 }
-
-
-
-// void getDistanceMatrix() async {
-//   try {
-//     var response = await Dio().get('https://maps.googleapis.com/maps/api/distancematrix/json?destinations=40.659569,-73.933783&origins=40.6655101,-73.89188969999998&key=YOUR_API_KEY_HERE');
-//     print(response);
-//   } catch (e) {
-//     print(e);
-//   }
-// }
 
