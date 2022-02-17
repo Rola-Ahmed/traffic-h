@@ -2,8 +2,11 @@
     package="com.example.flutter_application_1">
   
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <permission
-        android:name="com.example.mapexdemo.permission.MAPS_RECEIVE"/>
+    <permission android:name="com.example.mapexdemo.permission.MAPS_RECEIVE"/>
+
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+<uses-permission android:name="android.permission.INTERNET"/>
     
     
 
