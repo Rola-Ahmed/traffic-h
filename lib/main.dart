@@ -53,8 +53,8 @@ class MapFromToState extends State<FromTo> {
 
   
 
-    String orginInput='sreach orgin';
-  late String DestinationInput;
+    late String originInput;
+  late String destinationInput;
 
   Set<Marker> _markers = Set<Marker>();
   Set<Polygon> _polygons = Set<Polygon>();
@@ -151,7 +151,7 @@ class MapFromToState extends State<FromTo> {
                           controller: _originController,
                           decoration: InputDecoration(hintText: ' Origin'),
                           
-                          onChanged: (orginInput) async {
+                          onChanged: (originInput) async {
                            // getSuggestion(orginInput);
 
                             //print(orginInput);
@@ -194,13 +194,13 @@ class MapFromToState extends State<FromTo> {
                         TextFormField(
                           controller: _destinationController,
                           decoration: InputDecoration(hintText: ' Destination'),
-                          onChanged: (DestinationInput) {
+                          onChanged: (destinationInput) {
                           //  getSuggestion(DestinationInput);
-                            print(DestinationInput);
+                            print(destinationInput);
                           },
                          ), 
                          Text(
-                          '$LocationService().getDistancematrix2(_originController.text, _destinationController.text )',
+                          '${LocationService().getDistancematrix2(_destinationController.text,_originController.text)}',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 25,

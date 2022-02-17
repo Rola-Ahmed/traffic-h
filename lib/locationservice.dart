@@ -75,25 +75,26 @@ class LocationService {
 }*/
 
 
-      
-   Future<Map<String, dynamic>> getDistancematrix2s(
-      String origin, String destination)
-   async {
-final String url=' https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&&callback=initMap';
-var json='5mn';
-  var response = await http.get(Uri.parse(url));
+      ///String origin, String destination
+   Future<Map<String, dynamic>> getDistancematrix2( String origin, String destination
+      )
+   async
+    {
+final  String url=' https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
+//final  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
+var json;
+  //var response = await http.get(Uri.parse(url));
+  var response=await http.get(Uri.parse(url));
     //json = convert.jsonDecode(response.body);
    // return response;
     //print( json);
+  print ("the rsponse of diasnace matrix $response");
 
   if (response.statusCode == 200) {
-    var json = convert.jsonDecode(response.body);
+     json = convert.jsonDecode(response.body);
     return json; 
   } else {
     throw Exception('An error occurred getting places nearby');
   }
 }
-  
-
 }
-
