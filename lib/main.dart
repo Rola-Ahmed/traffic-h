@@ -56,8 +56,9 @@ class MapFromToState extends State<FromTo> {
 
   
 
-    late String originInput;
-  late String destinationInput;
+ 
+   late String originInputString='';
+ late String destinationInputString='';
 
   Set<Marker> _markers = Set<Marker>();
   Set<Polygon> _polygons = Set<Polygon>();
@@ -92,8 +93,8 @@ class MapFromToState extends State<FromTo> {
         //  var XR=Text('$point');
    var t!=orginInput;
          return(<orginInput!>);
-       //  late String orginInput;
- //late String DestinationInput;
+ late String OrginInput;
+ late String DestinationInput;
          }, */
         ),
       );
@@ -158,7 +159,10 @@ class MapFromToState extends State<FromTo> {
                           onChanged: (originInput) async {
                            // getSuggestion(orginInput);
 
-                            //print(orginInput);
+                            print(originInput);
+                            originInputString=originInput;
+                            print("the ssssssssssssssssssssssssssssss $originInputString");
+
 
                       //       var orginInput = await PlacesAutocomplete.show(
                       //     context: context,
@@ -201,15 +205,20 @@ class MapFromToState extends State<FromTo> {
                           onChanged: (destinationInput) {
                           //  getSuggestion(DestinationInput);
                             print(destinationInput);
+                             
+  destinationInputString=destinationInput;
+                            print("the inputtt is $_destinationController.text");
                           },
                          ), 
                          Text(
-                          '${LocationService().getDistancematrix(_destinationController.text,_originController.text)}',
+                         // '${LocationService().getDistancematrix(destinationInputString,originInputString)}',
+                         'Distance in '+LocationService().getDistancematrix(destinationInputString,originInputString),
                            style: TextStyle(
                              color: Colors.black,
                              fontSize: 15,
                            ),
                          ),
+                         
                       ],
                     ),
                   ),
