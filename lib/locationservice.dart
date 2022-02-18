@@ -76,12 +76,12 @@ class LocationService {
 
 
       ///String origin, String destination
-   Future<Map<String, dynamic>> getDistancematrix2( String origin, String destination
+   Future<Map<String, dynamic>> getDistancematrix( String origin, String destination
       )
    async
     {
-final  String url=' https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
-//final  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
+final  String url='https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
+//const  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
 var json;
   //var response = await http.get(Uri.parse(url));
   var response=await http.get(Uri.parse(url));
