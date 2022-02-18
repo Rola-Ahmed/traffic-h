@@ -125,6 +125,7 @@ class MapFromToState extends State<FromTo> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_new
     return new Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -202,13 +203,13 @@ class MapFromToState extends State<FromTo> {
                             print(destinationInput);
                           },
                          ), 
-                        //  Text(
-                        //   '$M',
-                        //    style: TextStyle(
-                        //      color: Colors.black,
-                        //      fontSize: 15,
-                        //    ),
-                        //  ),
+                         Text(
+                          '${LocationService().getDistancematrix(_destinationController.text,_originController.text)}',
+                           style: TextStyle(
+                             color: Colors.black,
+                             fontSize: 15,
+                           ),
+                         ),
                       ],
                     ),
                   ),
