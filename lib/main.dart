@@ -211,8 +211,8 @@ class MapFromToState extends State<FromTo> {
                           },
                          ), 
                          Text(
-                         // '${LocationService().getDistancematrix(destinationInputString,originInputString)}',
-                         'Distance in '+LocationService().getDistancematrix(destinationInputString,originInputString),
+                          '${LocationService().getDistancematrix(destinationInputString,originInputString)}',
+                         
                            style: TextStyle(
                              color: Colors.black,
                              fontSize: 15,
@@ -322,9 +322,6 @@ class MapFromToState extends State<FromTo> {
     );
     _setMarker(LatLng(lat, lng));
   }
-
-
-
 
 Future<List<Location>> locationFromAddress(
   String address, {

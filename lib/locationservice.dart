@@ -80,8 +80,8 @@ class LocationService {
       )
    async
     {
-final  String url='https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
-//const  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
+//final  String url='https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
+const  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
 var json;
   //var response = await http.get(Uri.parse(url));
   var response=await http.get(Uri.parse(url));
@@ -92,7 +92,9 @@ var json;
 
   if (response.statusCode == 200) {
      json = convert.jsonDecode(response.body);
-    return json; 
+    // json= response.body as String;
+    print ('Response body: ${response.body}'); 
+    return json;
   } else {
     throw Exception('An error occurred getting places nearby');
   }
