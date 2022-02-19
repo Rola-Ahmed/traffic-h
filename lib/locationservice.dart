@@ -32,7 +32,8 @@ class LocationService {
     var json = convert.jsonDecode(response.body);
     var results = json['result'] as Map<String, dynamic>;
 
-    print(results);
+    //print(results);
+    //print ('Response body: ${response.body}'); 
     return results;
   }
 
@@ -54,8 +55,52 @@ class LocationService {
       'polyline_decoded': PolylinePoints().decodePolyline(json['routes'][0]['overview_polyline']['points']),
     };
 
-    //print(results);
+   // print(results);
+  //print ('Response body: ${response.body}'); 
+   return results;
+   //return results.json['routes'][0]['legs'][0]['start_location'];
+  }
 
+
+   Future<Map<String, dynamic>> getDistance(
+      String   origin , String  destination) async {
+        //origin='miu cairo'; destination='guc' ;
+    final String url =
+        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$key&region=Eg&language=en,ar'; //libraries=places
+        
+
+    var response = await http.get(Uri.parse(url));
+    var json = convert.jsonDecode(response.body);
+    
+    var results =  json['routes'][0]['legs'][0]['distance'][0]['text'];
+    //json['routes'][0]['legs'][0]['distance'];
+    //var results =  json['routes'][0]['legs'][0]['start_location']; "duration"
+  
+
+    print("the get distance is $results");
+ //print ("Response body: ${response.body}"); 
+   return results;
+   //return results.json['routes'][0]['legs'][0]['start_location'];
+  }
+
+
+    Future<Map<String, dynamic>> getTime(
+      String   origin , String  destination) async {
+        //origin='miu cairo'; destination='guc' ;
+    final String url =
+        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$key&region=Eg&language=en,ar'; //libraries=places
+        
+
+    var response = await http.get(Uri.parse(url));
+    var json = convert.jsonDecode(response.body);
+    
+    var results =  json['routes'][0]['legs'][0]['duration']['text'];
+    //json['routes'][0]['legs'][0]['distance'];
+    //var results =  json['routes'][0]['legs'][0]['start_location']; "duration"
+  
+
+ print("the  duration is $results");
+ print ("Response body: ${response.body}"); 
    return results;
    //return results.json['routes'][0]['legs'][0]['start_location'];
   }
@@ -80,8 +125,8 @@ class LocationService {
       )
    async
     {
-//final  String url='https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
-const  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
+final  String url='https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$destination&origins=$origin&key=$key&departure_time=now';
+//const  String url= 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=849VCWC8%2BR9&destinations=San%20Francisco&key=$key';
 var json;
   //var response = await http.get(Uri.parse(url));
   var response=await http.get(Uri.parse(url));
@@ -93,7 +138,7 @@ var json;
   if (response.statusCode == 200) {
      json = convert.jsonDecode(response.body);
     // json= response.body as String;
-    print ('Response body: ${response.body}'); 
+   // print ('Response body: ${response.body}'); 
     return json;
   } else {
     throw Exception('An error occurred getting places nearby');

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './locationservice.dart';
+import 'package:search_map_place_updated/search_map_place_updated.dart';
 //import 'package:search_map_place_updated/search_map_place_updated.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -59,7 +60,8 @@ class MapFromToState extends State<FromTo> {
  
    late String originInputString='';
  late String destinationInputString='';
-
+ var DistanceofLocation=LocationService().getDistance("miu","guc");
+var TimeofLocation=LocationService().getTime("miu","guc");
   Set<Marker> _markers = Set<Marker>();
   Set<Polygon> _polygons = Set<Polygon>();
   Set<Polyline> _polylines = Set<Polyline>();
@@ -146,6 +148,24 @@ class MapFromToState extends State<FromTo> {
     //color: viewModel.color,
         child:  Column(
             children: [
+              SingleChildScrollView(
+          child:
+              SearchMapPlaceWidget(
+                        hasClearButton: true,
+                        placeType:PlaceType.address,
+                       // controller: _originController,
+                        placeholder: 'Enter the location',
+                        apiKey: Secrets.API_KEY,
+                        onSelected: ( place) async {
+                          //Geolocation? geolocation = await place.geolocation;
+                          print(place);
+                         // mapController.animateCamera(
+                           //   CameraUpdate.newLatLng(geolocation!.coordinates));
+                          //mapController.animateCamera(
+                            //  CameraUpdate.newLatLngBounds(geolocation.bounds, 0));
+                        },
+                      ),
+                      ),
               
               Row(
                 children: [
@@ -161,42 +181,10 @@ class MapFromToState extends State<FromTo> {
 
                             print(originInput);
                             originInputString=originInput;
-                            print("the ssssssssssssssssssssssssssssss $originInputString");
+                            //print("the ssssssssssssssssssssssssssssss $originInputString");
+                            print("the_origidddnController $_originController");
 
 
-                      //       var orginInput = await PlacesAutocomplete.show(
-                      //     context: context,
-                      //     apiKey: googleApikey,
-                      //     mode: Mode.overlay,
-                      //     types: [],
-                      //     //language:['en','ar'];
-                      //     strictbounds: false,
-                      //     components: [Component(Component.country, 'Eg')],
-                      //                 //google_map_webservice package
-                      //     onError: (err){
-                      //        print(err);
-                      //     }
-                      // );
-                  //     if(orginInput  != null){
-                  //       setState(() {
-                  //        location = orginInput.description.toString();
-                  //       },);
-                  //                              //form google_maps_webservice package
-                  //      final plist = GoogleMapsPlaces(apiKey:googleApikey,
-                  //             apiHeaders: await GoogleApiHeaders().getHeaders(),
-                  //                       //from google_api_headers package
-                  //       );
-                  //       String placeid = orginInput.placeId ?? "0";
-                  //       final detail = await plist.getDetailsByPlaceId(placeid);
-                  //       final geometry = detail.result.geometry!;
-                  //       final lat = geometry.location.lat;
-                  //       final lang = geometry.location.lng;
-                  //       var newlatlang = LatLng(lat, lang);
-                        
-
-                  //       //move map camera to selected place with animation
-                  //       //mapController?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: newlatlang, zoom: 17)));
-                  //  }
                           },
                         ),
                         TextFormField(
@@ -211,7 +199,9 @@ class MapFromToState extends State<FromTo> {
                           },
                          ), 
                          Text(
-                          '${LocationService().getDistancematrix(destinationInputString,originInputString)}',
+                          '$DistanceofLocation and $TimeofLocation',
+                          //_originController.text, _destinationController.text
+                          //"miu","guc"
                          
                            style: TextStyle(
                              color: Colors.black,
@@ -338,7 +328,6 @@ void M(){
   print('locatiooooooooooooons');
 print (locationFromAddress("Gronausestraat 710, Enschede"));
 }
-
 }
 
 
